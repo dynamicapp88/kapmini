@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">[[#{app.title}]]</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link th:if="${!isDevserver}" th:href="@{/css/bundle.css}" rel="stylesheet" />
+        <script th:src="@{/js/bundle.js}" defer></script>
+    </head>
+    <body hx-boost="true">
+        <header class="bg-gray-50">
+            <div class="container px-4 md:px-6">
+                <nav class="flex flex-wrap items-center justify-between py-2">
+                    <a th:href="@{/}" class="flex py-1.5 mr-4">
+                        <img th:src="@{/images/logo.png}" th:alt="#{app.title}" width="30" height="30" class="inline-block">
+                        <span class="text-xl pl-3">[[#{app.title}]]</span>
+                    </a>
+                    <button type="button" class="js-dropdown md:hidden border rounded" data-dropdown-keepopen="true"
+                            th:aria-label="#{navigation.toggle}" aria-controls="navbarToggle" aria-expanded="false">
+                        <div class="space-y-1.5 my-2.5 mx-4">
+                            <div class="w-6 h-0.5 bg-gray-500"></div>
+                            <div class="w-6 h-0.5 bg-gray-500"></div>
+                            <div class="w-6 h-0.5 bg-gray-500"></div>
+                        </div>
+                    </button>
+                    <div class="hidden md:block flex grow md:grow-0 justify-end basis-full md:basis-auto pt-3 md:pt-1 pb-1" id="navbarToggle">
+                        <ul class="flex">
+                            <li>
+                                <a th:href="@{/}" class="block text-gray-500 p-2">[[#{navigation.home}]]</a>
+                            </li>
+                            <li class="relative">
+                                <a class="js-dropdown block text-gray-500 p-2" href="#" id="navbarEntitiesLink" role="button"
+                                        aria-expanded="false">
+                                    <span>[[#{navigation.entities}]]</span>
+                                    <span class="text-[9px] align-[3px] pl-0.5">&#9660;</span>
+                                </a>
+                                <ul class="hidden block absolute right-0 bg-white border border-gray-300 rounded min-w-[10rem] py-2" aria-labelledby="navbarEntitiesLink">
+                                    <li><a th:href="@{/users}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{user.list.headline}]]</a></li>
+                                    <li><a th:href="@{/roles}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{role.list.headline}]]</a></li>
+                                    <li><a th:href="@{/permissions}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{permission.list.headline}]]</a></li>
+                                    <li><a th:href="@{/rolePermissions}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{rolePermission.list.headline}]]</a></li>
+                                    <li><a th:href="@{/resources}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{resource.list.headline}]]</a></li>
+                                    <li><a th:href="@{/userRoles}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{userRole.list.headline}]]</a></li>
+                                    <li><a th:href="@{/subDomains}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{subDomain.list.headline}]]</a></li>
+                                    <li><a th:href="@{/collaborators}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{collaborator.list.headline}]]</a></li>
+                                    <li><a th:href="@{/apps}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{app.list.headline}]]</a></li>
+                                    <li><a th:href="@{/forms}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{form.list.headline}]]</a></li>
+                                    <li><a th:href="@{/fields}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{field.list.headline}]]</a></li>
+                                    <li><a th:href="@{/records}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{record.list.headline}]]</a></li>
+                                    <li><a th:href="@{/fieldDatas}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{fieldData.list.headline}]]</a></li>
+                                    <li><a th:href="@{/workflows}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{workflow.list.headline}]]</a></li>
+                                    <li><a th:href="@{/workflowSteps}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{workflowStep.list.headline}]]</a></li>
+                                    <li><a th:href="@{/notificationConfigurations}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{notificationConfiguration.list.headline}]]</a></li>
+                                    <li><a th:href="@{/notificationConfigurationTypes}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{notificationConfigurationType.list.headline}]]</a></li>
+                                    <li><a th:href="@{/emailConfigs}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{emailConfig.list.headline}]]</a></li>
+                                    <li><a th:href="@{/sMSConfigs}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{sMSConfig.list.headline}]]</a></li>
+                                    <li><a th:href="@{/inAppConfigs}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{inAppConfig.list.headline}]]</a></li>
+                                    <li><a th:href="@{/whatsAppConfigs}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{whatsAppConfig.list.headline}]]</a></li>
+                                    <li><a th:href="@{/histories}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{history.list.headline}]]</a></li>
+                                    <li><a th:href="@{/userSettings}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{userSetting.list.headline}]]</a></li>
+                                    <li><a th:href="@{/auditLogs}" class="inline-block w-full hover:bg-gray-200 px-4 py-1">[[#{auditLog.list.headline}]]</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main class="my-12">
+            <div class="container px-4 md:px-6">
+                <p th:if="${MSG_SUCCESS}" class="bg-green-200 border-green-800 text-green-800 border rounded p-4 mb-6" role="alert">[[${MSG_SUCCESS}]]</p>
+                <p th:if="${MSG_INFO}" class="bg-blue-200 border-blue-800 text-blue-800 border rounded p-4 mb-6" role="alert">[[${MSG_INFO}]]</p>
+                <p th:if="${MSG_ERROR}" class="bg-red-200 border-red-800 text-red-800 border rounded p-4 mb-6" role="alert">[[${MSG_ERROR}]]</p>
+                <div layout:fragment="content" />
+            </div>
+        </main>
+    </body>
+</html>

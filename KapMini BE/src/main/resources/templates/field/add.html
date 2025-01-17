@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{field.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{field.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/fields}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{field.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('field')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='fieldName', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='fieldType', required=true, type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='defaultValue', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='validationRules')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='isRequired', type='checkbox')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='deleteAt')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='field', field='formId', required=true, type='select')}" />
+                <input type="submit" th:value="#{field.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

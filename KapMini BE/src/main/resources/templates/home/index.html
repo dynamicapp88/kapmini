@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{home.index.headline}]]</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1 class="grow text-3xl md:text-4xl font-medium mb-8">[[#{home.index.headline}]]</h1>
+            <p class="mb-4">[(#{home.index.text})]</p>
+            <p class="mb-12">
+                <span>[[#{home.index.swagger}]]</span>
+                <a th:href="@{/swagger-ui.html}" target="_blank" class="underline">[[#{home.index.swagger.link}]]</a>.
+            </p>
+            <div class="md:w-2/5 mb-12">
+                <h4 class="text-2xl font-medium mb-4">[[#{home.index.exploreEntities}]]</h4>
+                <div class="flex flex-col border border-gray-300 rounded">
+                    <a th:href="@{/users}" class="w-full border-gray-300 hover:bg-gray-100 border-b rounded-t px-4 py-2">[[#{user.list.headline}]]</a>
+                    <a th:href="@{/roles}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{role.list.headline}]]</a>
+                    <a th:href="@{/permissions}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{permission.list.headline}]]</a>
+                    <a th:href="@{/rolePermissions}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{rolePermission.list.headline}]]</a>
+                    <a th:href="@{/resources}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{resource.list.headline}]]</a>
+                    <a th:href="@{/userRoles}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{userRole.list.headline}]]</a>
+                    <a th:href="@{/subDomains}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{subDomain.list.headline}]]</a>
+                    <a th:href="@{/collaborators}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{collaborator.list.headline}]]</a>
+                    <a th:href="@{/apps}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{app.list.headline}]]</a>
+                    <a th:href="@{/forms}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{form.list.headline}]]</a>
+                    <a th:href="@{/fields}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{field.list.headline}]]</a>
+                    <a th:href="@{/records}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{record.list.headline}]]</a>
+                    <a th:href="@{/fieldDatas}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{fieldData.list.headline}]]</a>
+                    <a th:href="@{/workflows}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{workflow.list.headline}]]</a>
+                    <a th:href="@{/workflowSteps}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{workflowStep.list.headline}]]</a>
+                    <a th:href="@{/notificationConfigurations}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{notificationConfiguration.list.headline}]]</a>
+                    <a th:href="@{/notificationConfigurationTypes}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{notificationConfigurationType.list.headline}]]</a>
+                    <a th:href="@{/emailConfigs}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{emailConfig.list.headline}]]</a>
+                    <a th:href="@{/sMSConfigs}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{sMSConfig.list.headline}]]</a>
+                    <a th:href="@{/inAppConfigs}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{inAppConfig.list.headline}]]</a>
+                    <a th:href="@{/whatsAppConfigs}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{whatsAppConfig.list.headline}]]</a>
+                    <a th:href="@{/histories}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{history.list.headline}]]</a>
+                    <a th:href="@{/userSettings}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2">[[#{userSetting.list.headline}]]</a>
+                    <a th:href="@{/auditLogs}" class="w-full border-gray-300 hover:bg-gray-100 rounded-b px-4 py-2">[[#{auditLog.list.headline}]]</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

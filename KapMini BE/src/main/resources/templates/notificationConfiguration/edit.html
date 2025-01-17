@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{notificationConfiguration.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{notificationConfiguration.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/notificationConfigurations}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{notificationConfiguration.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('notificationConfiguration')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='notificationConfiguration', field='configID', disabled=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='notificationConfiguration', field='name', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='notificationConfiguration', field='isAction', type='checkbox')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='notificationConfiguration', field='description', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='notificationConfiguration', field='deleteAt', inputClass='js-datetimepicker')}" />
+                <input type="submit" th:value="#{notificationConfiguration.edit.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>
