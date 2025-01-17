@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{auditLog.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{auditLog.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/auditLogs/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{auditLog.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${auditLogs.empty}">[[#{auditLog.list.empty}]]</div>
+            <div th:if="${!auditLogs.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.id.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.entityName.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.entityID.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.actionType.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.actionDetails.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.performedBy.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.ip.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{auditLog.sessionID.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="auditLog : ${auditLogs}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${auditLog.id}]]</td>
+                            <td class="p-2">[[${auditLog.entityName}]]</td>
+                            <td class="p-2">[[${auditLog.entityID}]]</td>
+                            <td class="p-2">[[${auditLog.actionType}]]</td>
+                            <td class="p-2">[[${auditLog.actionDetails}]]</td>
+                            <td class="p-2">[[${auditLog.performedBy}]]</td>
+                            <td class="p-2">[[${auditLog.ip}]]</td>
+                            <td class="p-2">[[${auditLog.sessionID}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/auditLogs/edit/{id}(id=${auditLog.id})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{auditLog.list.edit}]]</a>
+                                    <form th:action="@{/auditLogs/delete/{id}(id=${auditLog.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{auditLog.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

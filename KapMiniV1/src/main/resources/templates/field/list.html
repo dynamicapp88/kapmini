@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{field.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{field.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/fields/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{field.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${fields.empty}">[[#{field.list.empty}]]</div>
+            <div th:if="${!fields.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{field.fieldId.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.fieldName.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.fieldType.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.defaultValue.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.validationRules.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.isRequired.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.deleteAt.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{field.formId.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="field : ${fields}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${field.fieldId}]]</td>
+                            <td class="p-2">[[${field.fieldName}]]</td>
+                            <td class="p-2">[[${field.fieldType}]]</td>
+                            <td class="p-2">[[${field.defaultValue}]]</td>
+                            <td class="p-2">[[${field.validationRules}]]</td>
+                            <td class="p-2">[[${field.isRequired}]]</td>
+                            <td class="p-2">[[${field.deleteAt}]]</td>
+                            <td class="p-2">[[${field.formId}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/fields/edit/{fieldId}(fieldId=${field.fieldId})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{field.list.edit}]]</a>
+                                    <form th:action="@{/fields/delete/{fieldId}(fieldId=${field.fieldId})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{field.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
