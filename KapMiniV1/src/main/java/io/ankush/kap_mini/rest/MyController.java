@@ -30,7 +30,7 @@ public class MyController {
 
     @PostMapping("/creater-user")
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<UUID> createuser(@RequestBody JSONObject jsonObject) {
+    public ResponseEntity<String> createuser(@RequestBody JSONObject jsonObject) {
         String domain = jsonObject.optString("subdomain");
         SubDomain sb = new SubDomain();
         sb.setName(domain);
@@ -44,7 +44,7 @@ public class MyController {
 
 
 
-        return new ResponseEntity<>(createdAppId, HttpStatus.CREATED);
+        return new ResponseEntity<>("test", HttpStatus.CREATED);
     }
 
     // appId -> form -->
