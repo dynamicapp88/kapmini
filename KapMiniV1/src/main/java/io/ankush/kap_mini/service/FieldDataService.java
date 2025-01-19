@@ -8,6 +8,8 @@ import io.ankush.kap_mini.repos.FieldDataRepository;
 import io.ankush.kap_mini.repos.FieldRepository;
 import io.ankush.kap_mini.repos.RecordRepository;
 import io.ankush.kap_mini.util.NotFoundException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Sort;
@@ -79,4 +81,19 @@ public class FieldDataService {
         return fieldData;
     }
 
+    public List<FieldDataDTO> getAllDataOfField(UUID fieldId) {
+    List<FieldData> data = new ArrayList<>();
+        final List<FieldData> fieldDatas = fieldDataRepository.findAll(Sort.by("fieldDataId"));
+
+        for(FieldData fd : fieldDatas ) {
+          Field field = fd.getFieldId();
+          if(field.getFieldId().equals(fieldId)) {
+              data.add(fd);
+          }
+      }
+        return data.stream()
+                .map(fieldData -> mapToDTO(fieldData, new FieldDataDTO()))
+                .toList();
+
+    }
 }

@@ -1,11 +1,25 @@
 package io.ankush.kap_mini.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import io.ankush.kap_mini.domain.FieldData;
+import io.ankush.kap_mini.model.FieldDTO;
 import io.ankush.kap_mini.model.FieldDataDTO;
+import io.ankush.kap_mini.model.FormDTO;
 import io.ankush.kap_mini.service.FieldDataService;
+import io.ankush.kap_mini.service.FieldService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -74,4 +88,28 @@ public class FieldDataResource {
         return ResponseEntity.noContent().build();
     }
 
+
+    ///
+    @Autowired
+    private FieldService fieldService;
+
+
+
+    @GetMapping("getAllFieldDataBasedOnFormId/{formId}")
+    public List<FieldDataDTO> getALlFieldDataBasedOnFormId(
+            @PathVariable(name = "formId") final UUID formId) {
+        List<FieldDTO> fieldList = fieldService.getListOfAllFieldBasedOnFormId(formId);
+        // formId
+        //list of fieldIds
+        // fetch all data
+        List<FieldDataDTO> lss = new ArrayList<>();
+        for (FieldDTO ff : fieldList) {
+            List<FieldDataDTO> a = fieldDataService.getAllDataOfField(ff.getFieldId());
+            for (FieldDataDTO aaa : a) {
+                lss.add(aaa);
+            }
+        }
+        return lss;
+
+    }
 }
