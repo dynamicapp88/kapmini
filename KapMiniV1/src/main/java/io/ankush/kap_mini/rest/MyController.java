@@ -113,7 +113,7 @@ public class MyController {
 
         final UUID createdFormId = formService.create(formDTO);
     //formFields
-
+         re =  re.optJSONObject("templateData");
         JSONArray fieldAa = re.optJSONArray("formFields");
         Map<String,UUID> map = new HashMap<>();
         for(int i = 0 ; i < fieldAa.length() ; i++) {
