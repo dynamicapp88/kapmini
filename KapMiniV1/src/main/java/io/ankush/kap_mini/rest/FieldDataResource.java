@@ -48,6 +48,16 @@ public class FieldDataResource {
         return new ResponseEntity<>(createdFieldDataId, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addList")
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<String> createFieldDatas(
+            @RequestBody @Valid final List<FieldDataDTO> fieldDataDTOList) {
+        for (FieldDataDTO ff : fieldDataDTOList) {
+            fieldDataService.create(ff);
+        }
+        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+    }
+
     @PutMapping("/{fieldDataId}")
     public ResponseEntity<UUID> updateFieldData(
             @PathVariable(name = "fieldDataId") final UUID fieldDataId,
