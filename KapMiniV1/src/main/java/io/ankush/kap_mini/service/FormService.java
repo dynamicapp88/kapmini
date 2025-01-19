@@ -15,6 +15,8 @@ import io.ankush.kap_mini.repos.RecordRepository;
 import io.ankush.kap_mini.repos.WorkflowStepRepository;
 import io.ankush.kap_mini.util.NotFoundException;
 import io.ankush.kap_mini.util.ReferencedWarning;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Sort;
@@ -46,6 +48,20 @@ public class FormService {
     public List<FormDTO> findAll() {
         final List<Form> forms = formRepository.findAll(Sort.by("formId"));
         return forms.stream()
+                .map(form -> mapToDTO(form, new FormDTO()))
+                .toList();
+    }
+
+    public List<FormDTO> findAllBasedOnAppId(final UUID appId) {
+        final List<Form> forms = formRepository.findAll(Sort.by("formId"));
+         List<Form> reF = new ArrayList<>();
+         for(Form f : forms){
+             App a = f.getAppID();
+             if(a!= null && a.getAppId().equals(appId)){
+                 reF.add(f);
+             }
+         }
+        return reF.stream()
                 .map(form -> mapToDTO(form, new FormDTO()))
                 .toList();
     }

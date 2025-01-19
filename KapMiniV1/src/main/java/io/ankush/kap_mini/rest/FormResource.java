@@ -1,5 +1,6 @@
 package io.ankush.kap_mini.rest;
 
+import io.ankush.kap_mini.domain.Form;
 import io.ankush.kap_mini.model.FormDTO;
 import io.ankush.kap_mini.service.FormService;
 import io.ankush.kap_mini.util.ReferencedException;
@@ -41,6 +42,11 @@ public class FormResource {
         return ResponseEntity.ok(formService.get(formId));
     }
 
+    @GetMapping("/getAllFormBasedOnAppId/{appId}")
+    public ResponseEntity<List<FormDTO>> getAllFormBasedonAppId(@PathVariable(name = "appId") final UUID appId) {
+        return ResponseEntity.ok(formService.findAllBasedOnAppId(appId));
+    }
+
     @PostMapping
     @ApiResponse(responseCode = "201")
     public ResponseEntity<UUID> createForm(@RequestBody @Valid final FormDTO formDTO) {
@@ -65,5 +71,7 @@ public class FormResource {
         formService.delete(formId);
         return ResponseEntity.noContent().build();
     }
+
+
 
 }

@@ -44,7 +44,7 @@ public class Form {
     @Column
     private LocalDateTime deleteAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appidid", nullable = false)
     private App appID;
 
