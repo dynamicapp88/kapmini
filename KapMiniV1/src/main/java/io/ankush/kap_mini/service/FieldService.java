@@ -1,16 +1,16 @@
 package io.ankush.kap_mini.service;
 
-import io.ankush.kap_mini.domain.Field;
-import io.ankush.kap_mini.domain.FieldData;
-import io.ankush.kap_mini.domain.Form;
-import io.ankush.kap_mini.domain.WorkflowStep;
+import io.ankush.kap_mini.domain.*;
 import io.ankush.kap_mini.model.FieldDTO;
+import io.ankush.kap_mini.model.FormDTO;
 import io.ankush.kap_mini.repos.FieldDataRepository;
 import io.ankush.kap_mini.repos.FieldRepository;
 import io.ankush.kap_mini.repos.FormRepository;
 import io.ankush.kap_mini.repos.WorkflowStepRepository;
 import io.ankush.kap_mini.util.NotFoundException;
 import io.ankush.kap_mini.util.ReferencedWarning;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Sort;
@@ -108,4 +108,19 @@ public class FieldService {
         return null;
     }
 
+    public List<FieldDTO> getListOfAllFieldBasedOnFormId(UUID formId) {
+        final List<Field> fields = fieldRepository.findAll(Sort.by("fieldId"));
+
+        List<Field> reF = new ArrayList<>();
+
+        for (Field fd : fields) {
+            Form form = fd.getFormId();
+            if (form != null && form.getFormId().equals(formId)) {
+                reF.add(fd);
+            }
+        }
+        return reF.stream()
+                .map(field -> mapToDTO(field, new FieldDTO()))
+                .toList();
+    }
 }

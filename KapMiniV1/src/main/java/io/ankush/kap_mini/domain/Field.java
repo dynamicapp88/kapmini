@@ -52,7 +52,7 @@ public class Field {
     @Column
     private String deleteAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "form_id_id", nullable = false)
     private Form formId;
 

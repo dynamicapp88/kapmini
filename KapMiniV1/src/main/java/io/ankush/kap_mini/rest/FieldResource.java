@@ -66,4 +66,9 @@ public class FieldResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("getListOfAllField/{formId}")
+    public ResponseEntity<List<FieldDTO>> getListOfAllFieldBasedOnFormId(@PathVariable(name = "formId") final UUID formId) {
+        return ResponseEntity.ok(fieldService.getListOfAllFieldBasedOnFormId(formId));
+    }
+
 }
